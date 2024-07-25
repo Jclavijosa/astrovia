@@ -52,11 +52,11 @@ Este proyecto permite cifrar y descifrar imágenes utilizando un esquema de cifr
 
 Para cifrar una imagen, ejecuta el siguiente comando:
 ```bash
-./bin/satellite_crypto encrypt Sentinel.jpg encrypted_Sentinel.bin
+./image_encrypt encrypt Sentinel.jpg output.enc master_key
 ```
 Para descifrar una imagen, ejecuta el siguiente comando:
 ```bash
-./bin/satellite_crypto decrypt encrypted_Sentinel.bin decrypted_Sentinel.jpg
+./image_encrypt decrypt output.enc Sentinel_decrypted.jpg master_key
 ```
 
 
