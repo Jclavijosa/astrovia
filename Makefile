@@ -1,30 +1,27 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I./include
+CFLAGS = -Wall -I./include
 LDFLAGS = -lssl -lcrypto
 
 SRCDIR = src
 OBJDIR = obj
-BINDIR = bin
 
 SOURCES = $(wildcard $(SRCDIR)/*.c)
 OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-EXECUTABLE = $(BINDIR)/satellite_crypto
 
-all: $(EXECUTABLE)
+TARGET = image_encrypt
 
-$(EXECUTABLE): $(OBJECTS) | $(BINDIR)
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
-
-$(BINDIR):
-	mkdir -p $(BINDIR)
+	mkdir -p $@
 
 clean:
-	rm -rf $(OBJDIR) $(BINDIR)
+	rm -rf $(OBJDIR) $(TARGET)
 
 .PHONY: all clean
