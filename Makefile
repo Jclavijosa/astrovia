@@ -1,27 +1,39 @@
+# Nombre del ejecutable
+TARGET = main
+
+# Compilador y flags
+CXX = g++
+CXXFLAGS = -Wall -std=c++17 -O2
 CC = gcc
-CFLAGS = -Wall -I./include
-LDFLAGS = -lssl -lcrypto
+CFLAGS = -Wall -O2
 
-SRCDIR = src
-OBJDIR = obj
+# Librerías y paths
+LIBS = -lcrypto -lssl
+INCLUDES = -I./include
+LDFLAGS = -L/usr/local/lib
 
-SOURCES = $(wildcard $(SRCDIR)/*.c)
-OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+# Archivos fuente y objetos
+SRCS_CPP = src/main.cpp
+SRCS_C = src/keygen.c src/utils.c
+OBJS_CPP = $(SRCS_CPP:.cpp=.o)
+OBJS_C = $(SRCS_C:.c=.o)
 
-TARGET = image_encrypt
-
+# Reglas
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+$(TARGET): $(OBJS_CPP) $(OBJS_C)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+src/main.o: src/main.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR):
-	mkdir -p $@
+src/keygen.o: src/keygen.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+src/utils.o: src/utils.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR) $(TARGET)
+	rm -f $(TARGET) src/*.o
 
 .PHONY: all clean
