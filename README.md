@@ -48,16 +48,19 @@ Este proyecto permite cifrar y descifrar imágenes utilizando un esquema de cifr
 
 ## Uso
 
-### Cifrar una Imagen
+### Cifrar y descifrar una Imagen
 
 Para cifrar una imagen, ejecuta el siguiente comando:
 ```bash
-./image_encrypt encrypt Sentinel.jpg output.enc master_key
+./main encrypt Sentinel.jpg output.dat
 ```
 Para descifrar una imagen, ejecuta el siguiente comando:
 ```bash
-./image_encrypt decrypt output.enc Sentinel_decrypted.jpg master_key
+./main decrypt output.dat Sentinel_decrypted.jpg 
 ```
-
+## Verificar la integridad de la imagen descifrada
+```bash
+md5sum Sentinel.jpg Sentinel_decrypted.jpg 
+```
 
 
