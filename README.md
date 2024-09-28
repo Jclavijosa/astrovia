@@ -50,7 +50,7 @@ Este proyecto permite cifrar y descifrar imágenes utilizando un esquema de cifr
 
 ### Cifrar y descifrar una Imagen
 
-Para cifrar una imagen, ejecuta el siguiente comando:
+Para cifrar una imagen, ejecuta el siguiente comando, numero de secuencia cualquier numero entero:
 ```bash
 Uso: ./main <operacion> <archivo_entrada> <archivo_salida> <numero_secuencia>
 
@@ -58,7 +58,7 @@ Uso: ./main <operacion> <archivo_entrada> <archivo_salida> <numero_secuencia>
 
 ```
 
-Para descifrar una imagen, ejecuta el siguiente comando:
+Para descifrar una imagen, ejecuta el siguiente comando, numero de secuencia cualquier numero entero:
 ```bash
 Uso: ./main <operacion> <archivo_entrada> <archivo_salida> <numero_secuencia>
 
