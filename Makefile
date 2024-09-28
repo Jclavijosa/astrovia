@@ -9,12 +9,11 @@ CFLAGS = -Wall -O2
 
 # Librerías y paths
 LIBS = -lcrypto -lssl
-INCLUDES = -I./include
 LDFLAGS = -L/usr/local/lib
 
 # Archivos fuente y objetos
-SRCS_CPP = src/main.cpp
-SRCS_C = src/keygen.c src/utils.c
+SRCS_CPP = main.cpp
+SRCS_C = keygen.c utils.c
 OBJS_CPP = $(SRCS_CPP:.cpp=.o)
 OBJS_C = $(SRCS_C:.c=.o)
 
@@ -24,16 +23,13 @@ all: $(TARGET)
 $(TARGET): $(OBJS_CPP) $(OBJS_C)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-src/main.o: src/main.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-src/keygen.o: src/keygen.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-src/utils.o: src/utils.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET) src/*.o
+	rm -f $(TARGET) *.o
 
 .PHONY: all clean

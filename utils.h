@@ -5,9 +5,6 @@
 extern "C" {
 #endif
 
-/**
- * @brief Maneja los errores de OpenSSL y muestra los mensajes correspondientes.
- */
 void handleErrors(void);
 
 #ifdef __cplusplus
@@ -15,3 +12,4 @@ void handleErrors(void);
 #endif
 
 #endif // UTILS_H
+
